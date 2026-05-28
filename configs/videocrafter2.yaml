@@ -1,0 +1,25 @@
+# ==============================================================================
+# MIGA Configuration for VideoCrafter2
+# Paper: "Enhancing Train-Free Infinite-Frame Generation for Consistent Long Videos"
+# ==============================================================================
+
+miga:
+  # --- Two-Stage Training-Inference Alignment (TTA) ---
+  sampling_steps: 64              # Total denoising steps T
+  saw_width: 4                    # Lzig: zigzag width in Stage 1 (latents per noise level)
+
+  # --- Generation Length ---
+  long_iter_nums: 30              # Number of generated latent chunks
+                                  # Total latent frames N = long_iter_nums * saw_width
+
+  # --- Dual Consistency Enhancement (DCE) ---
+  # Long-Range Frame Guidance
+  temporal_memory_len: 4          # m_guid: number of long-range guidance frames
+
+  # Self-Reflection
+  involve_resample: false         # Whether to enable self-reflection correction
+  resample_threshold: 0.5        # delta_adju: consistency score drop threshold
+                                  # Smaller value -> more frequent correction -> better quality but slower
+
+  # --- Output ---
+  save_inter_results: true        # Whether to save intermediate results (for debugging)
